@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260328a" />
 </head>
 <body>
   <div class="bg-orb orb-a"></div>
@@ -18,8 +18,7 @@
     <a class="logo" href="#top">GONZUI</a>
     <nav class="nav">
       <a href="#stats">個人成績</a>
-      <a href="#schedule">試合予定</a>
-      <a href="#apparel">アパレル</a>
+      <a href="#schedule">試合結果・予定</a>
       <a href="#youtube">動画</a>
     </nav>
   </header>
@@ -34,20 +33,19 @@
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#schedule">次の試合を見る</a>
-        <a class="btn btn-ghost" href="#apparel">アパレルへ</a>
         <a class="btn btn-youtube" href="https://www.youtube.com/@gonzuibaseball5383" target="_blank" rel="noopener noreferrer">YouTube</a>
       </div>
       <div class="hero-kpis">
         <article class="kpi">
-          <p class="kpi-value" data-target="24">0</p>
+          <p class="kpi-value" id="kpi-players">0</p>
           <p class="kpi-label">登録選手</p>
         </article>
         <article class="kpi">
-          <p class="kpi-value" data-target="62">0</p>
+          <p class="kpi-value" id="kpi-rbi">0</p>
           <p class="kpi-label">今季打点</p>
         </article>
         <article class="kpi">
-          <p class="kpi-value" data-target="18">0</p>
+          <p class="kpi-value" id="kpi-wins">0</p>
           <p class="kpi-label">今季勝利数</p>
         </article>
       </div>
@@ -58,11 +56,21 @@
         <p class="eyebrow">PLAYER STATS</p>
         <h2>個人成績</h2>
       </div>
-      <p class="stats-subtitle">打撃ランキング</p>
+      <p class="stats-subtitle">2026 主要打撃ランキング</p>
+      <p class="ranking-note">
+        規定打席 = 試合数×1.0（現在:
+        <span id="season-games-batting">0</span>試合→<span id="qualified-pa">0</span>打席） / 同率時は打席数が多い順
+      </p>
       <div class="ranking-grid" id="batting-rankings"></div>
-      <p class="stats-subtitle">打撃成績（基本）</p>
+      <p class="stats-subtitle">2026 主要投手ランキング</p>
+      <p class="ranking-note">
+        規定投球回 = 試合数×0.5（現在:
+        <span id="season-games-pitching">0</span>試合→<span id="qualified-innings">0</span>回） / 同率時は投球回が多い順
+      </p>
+      <div class="ranking-grid" id="pitching-rankings"></div>
+      <p class="stats-subtitle">打撃成績</p>
       <div class="table-wrap">
-        <table id="basic-stats-table">
+        <table id="batting-stats-table">
           <thead>
             <tr>
               <th>背番号 / 選手</th>
@@ -74,12 +82,14 @@
               <th>本塁打</th>
               <th>打点</th>
               <th>得点</th>
+              <th>出塁率</th>
               <th>盗塁</th>
+              <th>OPS</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1 内山 大勢</td>
+              <td><a class="player-link" href="players/01-uchiyama-taisei.html">1 内山 大勢</a></td>
               <td>6</td>
               <td>.387</td>
               <td>22</td>
@@ -88,10 +98,12 @@
               <td>1</td>
               <td>4</td>
               <td>7</td>
+              <td>.500</td>
               <td>3</td>
+              <td>1.167</td>
             </tr>
             <tr>
-              <td>2 湯元 祥太郎</td>
+              <td><a class="player-link" href="players/02-yumoto-shotaro.html">2 湯元祥太郎</a></td>
               <td>6</td>
               <td>.353</td>
               <td>22</td>
@@ -100,10 +112,40 @@
               <td>0</td>
               <td>5</td>
               <td>2</td>
+              <td>.429</td>
               <td>2</td>
+              <td>.958</td>
             </tr>
             <tr>
-              <td>10 権田 一真</td>
+              <td><a class="player-link" href="players/06-kusunoki-takuma.html">6 楠拓真</a></td>
+              <td>1</td>
+              <td>.500</td>
+              <td>3</td>
+              <td>2</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>.667</td>
+              <td>0</td>
+              <td>1.167</td>
+            </tr>
+            <tr>
+              <td><a class="player-link" href="players/08-yoshinaga-keita.html">8 吉永慧太</a></td>
+              <td>1</td>
+              <td>1.000</td>
+              <td>4</td>
+              <td>2</td>
+              <td>2</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              <td>1.000</td>
+              <td>0</td>
+              <td>2.000</td>
+            </tr>
+            <tr>
+              <td><a class="player-link" href="players/10-gonda-kazuma.html">10 権田一真</a></td>
               <td>4</td>
               <td>.222</td>
               <td>11</td>
@@ -112,10 +154,26 @@
               <td>0</td>
               <td>1</td>
               <td>1</td>
+              <td>.364</td>
               <td>0</td>
+              <td>.919</td>
             </tr>
             <tr>
-              <td>15 波止 元太</td>
+              <td><a class="player-link" href="players/11-inomata-kosei.html">11 猪俣洸生</a></td>
+              <td>2</td>
+              <td>.000</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>.000</td>
+              <td>0</td>
+              <td>.000</td>
+            </tr>
+            <tr>
+              <td><a class="player-link" href="players/15-hato-genta.html">15 波止元太</a></td>
               <td>4</td>
               <td>.167</td>
               <td>15</td>
@@ -124,10 +182,12 @@
               <td>0</td>
               <td>4</td>
               <td>2</td>
+              <td>.267</td>
               <td>0</td>
+              <td>.600</td>
             </tr>
             <tr>
-              <td>18 松崎 海</td>
+              <td><a class="player-link" href="players/18-matsuzaki-kai.html">18 松崎 海</a></td>
               <td>5</td>
               <td>.467</td>
               <td>16</td>
@@ -136,10 +196,12 @@
               <td>2</td>
               <td>3</td>
               <td>4</td>
+              <td>.500</td>
               <td>1</td>
+              <td>1.433</td>
             </tr>
             <tr>
-              <td>26 権田 心</td>
+              <td><a class="player-link" href="players/26-gonda-kokoro.html">26 権田心</a></td>
               <td>2</td>
               <td>.200</td>
               <td>7</td>
@@ -148,10 +210,12 @@
               <td>0</td>
               <td>1</td>
               <td>1</td>
+              <td>.429</td>
               <td>0</td>
+              <td>.629</td>
             </tr>
             <tr>
-              <td>30 元岡 泰雅</td>
+              <td><a class="player-link" href="players/30-motooka-taiga.html">30 元岡泰雅</a></td>
               <td>6</td>
               <td>.385</td>
               <td>15</td>
@@ -160,10 +224,12 @@
               <td>0</td>
               <td>4</td>
               <td>2</td>
+              <td>.467</td>
               <td>1</td>
+              <td>.928</td>
             </tr>
             <tr>
-              <td>33 松尾 大輝</td>
+              <td><a class="player-link" href="players/33-matsuo-daiki.html">33 松尾大輝</a></td>
               <td>4</td>
               <td>.125</td>
               <td>11</td>
@@ -172,10 +238,12 @@
               <td>0</td>
               <td>1</td>
               <td>1</td>
+              <td>.364</td>
               <td>0</td>
+              <td>.489</td>
             </tr>
             <tr>
-              <td>39 石橋 拓馬</td>
+              <td><a class="player-link" href="players/39-ishibashi-takuma.html">39 石橋拓馬</a></td>
               <td>4</td>
               <td>.222</td>
               <td>10</td>
@@ -184,10 +252,12 @@
               <td>0</td>
               <td>2</td>
               <td>0</td>
+              <td>.300</td>
               <td>0</td>
+              <td>.522</td>
             </tr>
             <tr>
-              <td>42 田中心</td>
+              <td><a class="player-link" href="players/42-tachuushin.html">42 田中心</a></td>
               <td>3</td>
               <td>.143</td>
               <td>8</td>
@@ -196,10 +266,12 @@
               <td>0</td>
               <td>0</td>
               <td>1</td>
+              <td>.250</td>
               <td>0</td>
+              <td>.393</td>
             </tr>
             <tr>
-              <td>81 高山 稜太</td>
+              <td><a class="player-link" href="players/81-takayama-ryota.html">81 高山稜太</a></td>
               <td>5</td>
               <td>.375</td>
               <td>12</td>
@@ -208,44 +280,53 @@
               <td>0</td>
               <td>0</td>
               <td>2</td>
+              <td>.583</td>
               <td>1</td>
+              <td>.958</td>
+            </tr>
+            <tr>
+              <td><a class="player-link" href="players/86-nagashima-haru.html">86 永島晴</a></td>
+              <td>4</td>
+              <td>.273</td>
+              <td>11</td>
+              <td>11</td>
+              <td>3</td>
+              <td>0</td>
+              <td>2</td>
+              <td>1</td>
+              <td>.273</td>
+              <td>0</td>
+              <td>.727</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="stats-subtitle">打撃成績（詳細）</p>
+      <p class="stats-subtitle">投手成績</p>
       <div class="table-wrap">
-        <table id="advanced-stats-table">
+        <table id="pitching-stats-table">
           <thead>
             <tr>
               <th>背番号 / 選手</th>
-              <th>出塁率</th>
-              <th>長打率</th>
-              <th>得点圏打率</th>
-              <th>OPS</th>
-              <th>二塁打</th>
-              <th>三塁打</th>
-              <th>塁打数</th>
-              <th>三振</th>
-              <th>四球</th>
-              <th>死球</th>
-              <th>犠打</th>
-              <th>犠飛</th>
-              <th>併殺打</th>
+              <th>試合</th>
+              <th>勝</th>
+              <th>敗</th>
+              <th>S</th>
+              <th>H</th>
+              <th>投球回</th>
+              <th>失点</th>
+              <th>自責点</th>
+              <th>防御率</th>
+              <th>奪三振</th>
+              <th>与四球</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>1 内山 大勢</td><td>.500</td><td>.667</td><td>.200</td><td>1.167</td><td>2</td><td>0</td><td>12</td><td>1</td><td>3</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
-            <tr><td>2 湯元 祥太郎</td><td>.429</td><td>.529</td><td>.600</td><td>.958</td><td>1</td><td>1</td><td>9</td><td>1</td><td>2</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-            <tr><td>10 権田 一真</td><td>.364</td><td>.556</td><td>.000</td><td>.919</td><td>1</td><td>1</td><td>5</td><td>3</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-            <tr><td>15 波止 元太</td><td>.267</td><td>.333</td><td>.250</td><td>.600</td><td>0</td><td>1</td><td>4</td><td>6</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
-            <tr><td>18 松崎 海</td><td>.500</td><td>.933</td><td>.250</td><td>1.433</td><td>1</td><td>0</td><td>14</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-            <tr><td>26 権田 心</td><td>.429</td><td>.200</td><td>.333</td><td>.629</td><td>0</td><td>0</td><td>1</td><td>1</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-            <tr><td>30 元岡 泰雅</td><td>.467</td><td>.462</td><td>.500</td><td>.928</td><td>1</td><td>0</td><td>6</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-            <tr><td>33 松尾 大輝</td><td>.364</td><td>.125</td><td>.000</td><td>.489</td><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-            <tr><td>39 石橋 拓馬</td><td>.300</td><td>.222</td><td>.200</td><td>.522</td><td>0</td><td>0</td><td>2</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-            <tr><td>42 田中心</td><td>.250</td><td>.143</td><td>.000</td><td>.393</td><td>0</td><td>0</td><td>1</td><td>2</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-            <tr><td>81 高山 稜太</td><td>.583</td><td>.375</td><td>.000</td><td>.958</td><td>0</td><td>0</td><td>3</td><td>1</td><td>4</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td><a class="player-link" href="players/02-yumoto-shotaro.html">2 湯元祥太郎</a></td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1回0/3</td><td>1</td><td>0</td><td>0.00</td><td>2</td><td>1</td></tr>
+            <tr><td><a class="player-link" href="players/10-gonda-kazuma.html">10 権田一真</a></td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1回0/3</td><td>0</td><td>0</td><td>0.00</td><td>0</td><td>0</td></tr>
+            <tr><td><a class="player-link" href="players/11-inomata-kosei.html">11 猪俣洸生</a></td><td>2</td><td>2</td><td>0</td><td>0</td><td>0</td><td>14回0/3</td><td>0</td><td>0</td><td>0.00</td><td>12</td><td>2</td></tr>
+            <tr><td><a class="player-link" href="players/18-matsuzaki-kai.html">18 松崎 海</a></td><td>4</td><td>3</td><td>0</td><td>0</td><td>1</td><td>13回0/3</td><td>7</td><td>1</td><td>0.54</td><td>5</td><td>0</td></tr>
+            <tr><td><a class="player-link" href="players/39-ishibashi-takuma.html">39 石橋拓馬</a></td><td>3</td><td>1</td><td>0</td><td>1</td><td>1</td><td>9回0/3</td><td>8</td><td>2</td><td>1.56</td><td>10</td><td>0</td></tr>
+            <tr><td><a class="player-link" href="players/42-tachuushin.html">42 田中心</a></td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1回0/3</td><td>0</td><td>0</td><td>0.00</td><td>2</td><td>0</td></tr>
           </tbody>
         </table>
       </div>
@@ -253,51 +334,26 @@
 
     <section id="schedule" class="section reveal">
       <div class="section-head">
-        <p class="eyebrow">GAME CALENDAR</p>
-        <h2>試合予定</h2>
+        <p class="eyebrow">GAME LOG</p>
+        <h2>試合結果・予定</h2>
       </div>
-      <div class="cards">
-        <article class="card">
-          <p class="date">2026.04.05 SUN</p>
-          <h3>vs BLUE FALCONS</h3>
-          <p>09:00 / 多摩川緑地グラウンド C面</p>
+      <div class="schedule-layout">
+        <article class="log-panel">
+          <h3>2026年 試合結果</h3>
+          <ul class="game-list" id="results-list">
+            <li><span class="game-date">2026.03.22 (日)</span><span class="game-type">公式戦</span><span class="game-opponent">vs アーミー</span><span class="game-result win">3-2 勝ち</span></li>
+            <li><span class="game-date">2026.03.22 (日)</span><span class="game-type">公式戦</span><span class="game-opponent">vs ドジャース</span><span class="game-result win">3-1 勝ち</span></li>
+            <li><span class="game-date">2026.03.15 (日)</span><span class="game-type">公式戦</span><span class="game-opponent">vs オリオンズ</span><span class="game-result win">3-0 勝ち</span></li>
+            <li><span class="game-date">2026.03.08 (日)</span><span class="game-type">公式戦</span><span class="game-opponent">vs パティエンス</span><span class="game-result win">1-0 勝ち</span></li>
+            <li><span class="game-date">2026.02.22 (日)</span><span class="game-type">練習試合</span><span class="game-opponent">vs D-DOGS</span><span class="game-result win">4-11 勝ち</span></li>
+            <li><span class="game-date">2026.02.15 (日)</span><span class="game-type">練習試合</span><span class="game-opponent">vs 宗像ドジャース</span><span class="game-result win">10-5 勝ち</span></li>
+          </ul>
         </article>
-        <article class="card">
-          <p class="date">2026.04.12 SUN</p>
-          <h3>vs OCEAN MONKEYS</h3>
-          <p>13:00 / 江戸川河川敷グラウンド A面</p>
-        </article>
-        <article class="card">
-          <p class="date">2026.04.19 SUN</p>
-          <h3>vs RED PHOENIX</h3>
-          <p>10:30 / 荒川総合運動公園 第2球場</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="apparel" class="section reveal">
-      <div class="section-head">
-        <p class="eyebrow">TEAM APPAREL</p>
-        <h2>アパレル</h2>
-      </div>
-      <div class="merch">
-        <article class="merch-card">
-          <span class="tag">NEW</span>
-          <h3>Game Jersey 2026</h3>
-          <p>通気性メッシュ・刺繍ロゴ仕様</p>
-          <p class="price">¥8,900</p>
-        </article>
-        <article class="merch-card">
-          <span class="tag">POPULAR</span>
-          <h3>Club Hoodie</h3>
-          <p>厚手12oz・裏起毛・限定カラー</p>
-          <p class="price">¥7,400</p>
-        </article>
-        <article class="merch-card">
-          <span class="tag">LIMITED</span>
-          <h3>Cap "GZ-01"</h3>
-          <p>スナップバック・3D刺繍ロゴ</p>
-          <p class="price">¥4,800</p>
+        <article class="log-panel">
+          <h3>次の試合予定</h3>
+          <ul class="game-list" id="upcoming-list">
+            <li><span class="game-date">2026.04.05 (日)</span><span class="game-type">東福岡野球連盟リーグ戦</span><span class="game-opponent">第3節</span><span class="game-result">詳細時刻・会場は調整中</span></li>
+          </ul>
         </article>
       </div>
     </section>
@@ -323,6 +379,6 @@
     <p>© 2026 GONZUI BASEBALL CLUB</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260328a"></script>
 </body>
 </html>

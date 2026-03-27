@@ -222,6 +222,30 @@ h1 {
   letter-spacing: 0.02em;
 }
 
+.player-directory {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.player-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 98, 90, 0.45);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #ffd9d6;
+  text-decoration: none;
+  font-size: 0.92rem;
+  background: rgba(37, 8, 8, 0.75);
+}
+
+.player-chip:hover {
+  color: #fff0ee;
+  border-color: rgba(255, 145, 136, 0.7);
+}
+
 .ranking-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -240,6 +264,12 @@ h1 {
   margin: 0 0 10px;
   font-size: 1rem;
   color: #ffc6c2;
+}
+
+.ranking-note {
+  margin: 0 0 8px;
+  color: #d5a7a2;
+  font-size: 0.86rem;
 }
 
 .ranking-list {
@@ -272,6 +302,71 @@ h1 {
   font-weight: 800;
 }
 
+.schedule-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.log-panel {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  background: linear-gradient(165deg, rgba(42, 10, 10, 0.88), rgba(11, 3, 3, 0.92));
+}
+
+.log-panel h3 {
+  margin: 0 0 12px;
+  color: #ffd4d1;
+}
+
+.game-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.game-list li {
+  display: grid;
+  grid-template-columns: 138px 84px 1fr auto;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 90, 79, 0.2);
+  align-items: center;
+}
+
+.game-list li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.game-date {
+  color: #ffc1bc;
+  font-weight: 700;
+}
+
+.game-type {
+  color: #ff9b94;
+  font-size: 0.86rem;
+}
+
+.game-opponent {
+  color: #ffe8e6;
+  font-weight: 700;
+}
+
+.game-result {
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: right;
+}
+
+.game-result.win {
+  color: #9effb8;
+  font-weight: 700;
+}
+
 .table-wrap {
   margin-top: 18px;
   border: 1px solid var(--line);
@@ -297,6 +392,16 @@ td {
 
 td:first-child {
   font-weight: 700;
+}
+
+.player-link {
+  color: #ffd7d4;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 120, 110, 0.5);
+}
+
+.player-link:hover {
+  color: #ff968f;
 }
 
 thead tr {
@@ -438,6 +543,82 @@ tbody tr:hover {
   transform: translateY(0);
 }
 
+.player-page {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+.back-link {
+  display: inline-flex;
+  margin-top: 10px;
+  color: #ff9b94;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.back-link:hover {
+  color: #ffd0cc;
+}
+
+.player-hero {
+  margin-top: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  background: linear-gradient(155deg, rgba(57, 10, 10, 0.88), rgba(14, 3, 3, 0.95));
+}
+
+.player-number {
+  margin: 0;
+  color: #ff8a80;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.player-name {
+  margin: 4px 0 10px;
+  font-size: clamp(2rem, 4.5vw, 3.1rem);
+  line-height: 1;
+}
+
+.player-summary {
+  margin: 0;
+  color: var(--muted);
+}
+
+.player-meta {
+  margin: 10px 0 0;
+  color: #ffd0cc;
+  font-weight: 700;
+}
+
+.pill-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pill {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(18, 4, 4, 0.72);
+}
+
+.pill dt {
+  margin: 0;
+  color: #ffaea8;
+  font-size: 0.82rem;
+}
+
+.pill dd {
+  margin: 4px 0 0;
+  font-weight: 800;
+  color: #ffe0de;
+}
+
 @media (max-width: 900px) {
   .cards,
   .merch,
@@ -446,6 +627,10 @@ tbody tr:hover {
   }
 
   .ranking-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-layout {
     grid-template-columns: 1fr;
   }
 
@@ -483,6 +668,10 @@ tbody tr:hover {
     font-size: 0.84rem;
     white-space: nowrap;
     background: rgba(35, 8, 8, 0.7);
+  }
+
+  .pill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -561,6 +750,24 @@ tbody tr:hover {
   .merch-card,
   .youtube-panel {
     padding: 15px;
+  }
+
+  .game-list li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    align-items: flex-start;
+  }
+
+  .game-result {
+    text-align: left;
+  }
+
+  .player-page {
+    padding: 14px 14px 60px;
+  }
+
+  .player-hero {
+    padding: 16px;
   }
 }
 
