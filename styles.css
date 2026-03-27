@@ -279,6 +279,7 @@ h1 {
   overflow-x: auto;
   overflow-y: hidden;
   background: linear-gradient(170deg, rgba(34, 8, 8, 0.88), rgba(10, 3, 3, 0.94));
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -454,13 +455,157 @@ tbody tr:hover {
 
   .site-header {
     border-radius: 18px;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     gap: 8px;
+    padding: 10px 12px;
+    margin-top: 8px;
   }
 
   .nav {
-    flex-wrap: wrap;
-    gap: 12px;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav a {
+    border: 1px solid rgba(255, 90, 79, 0.35);
+    border-radius: 999px;
+    padding: 7px 11px;
+    font-size: 0.84rem;
+    white-space: nowrap;
+    background: rgba(35, 8, 8, 0.7);
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 20px 14px 64px;
+  }
+
+  .hero {
+    padding: 42px 0 28px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 10vw, 2.9rem);
+    line-height: 0.95;
+  }
+
+  .lead {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    margin: 20px 0 22px;
+  }
+
+  .btn {
+    flex: 1 1 calc(50% - 8px);
+    min-height: 44px;
+    padding: 12px 10px;
+    font-size: 0.92rem;
+  }
+
+  .kpi {
+    padding: 14px;
+  }
+
+  .kpi-value {
+    font-size: 1.65rem;
+  }
+
+  .section {
+    margin-top: 40px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.75rem, 8vw, 2.4rem);
+  }
+
+  .stats-subtitle {
+    margin-top: 16px;
+    font-size: 0.94rem;
+  }
+
+  .ranking-card {
+    padding: 13px;
+  }
+
+  .ranking-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  th,
+  td {
+    padding: 11px 12px;
+    font-size: 0.88rem;
+  }
+
+  table {
+    min-width: 760px;
+  }
+
+  .card,
+  .merch-card,
+  .youtube-panel {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    top: 6px;
+    border-radius: 14px;
+    gap: 6px;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .eyebrow {
+    font-size: 0.82rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .btn {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .hero-kpis {
+    gap: 10px;
+  }
+
+  .kpi-label {
+    font-size: 0.86rem;
+  }
+
+  .rank-player {
+    font-size: 0.9rem;
+  }
+
+  .rank-value {
+    font-size: 0.95rem;
+  }
+
+  table {
+    min-width: 700px;
   }
 }
